@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Basic Segment tree for log(n) range queries that update in log(n) time after insertions. Should work with any summable datastructure.
 template <class T>
 class SegTree {
     private:
@@ -51,7 +52,7 @@ class SegTree {
             build_seg_tree(0, 0, this->input_array.size()-1);
         }
 
-        //O(2*n) time complexity (n + n/2 + ... = 2*n). O(log(n)) space complexity for call stack. This could be reduced to O(1) by making it iterative 
+        //O(n) time complexity. O(log(n)) space complexity for call stack. This could be reduced to O(1) by making it iterative. 
         T build_seg_tree(T seg_index, T left_index, T right_index){
             if(right_index == left_index){
                 this->seg_tree[seg_index] = this->input_array[left_index];
@@ -68,7 +69,7 @@ class SegTree {
             insert_helper(index, (value - this->input_array[index]), 0, 0, this->input_array.size()-1);
         }
 
-        //assumes a valid query input (seg_index = 0 )
+        //assumes a valid query input (seg_index = 0)
         T query_range_sum(T left_index, T right_index){
             return query_range_helper(left_index, right_index, 0, 0, this->input_array.size()-1);
         }
