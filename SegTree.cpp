@@ -1,36 +1,5 @@
 #include <iostream>
-#include <string>
-#include <set>
-#include <unordered_set>
-#include <map>
-#include <unordered_map> 
-#include <iterator>
-#include <list>
 #include <vector>
-#include <algorithm>
-#include <queue>
-#include <deque>
-#include <stack>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
-#include <time.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <sstream>
-
-#define MOD 1000000007
-#define max(a, b) (a < b ? b : a) 
-#define min(a, b) ((a > b) ? b : a) 
-
-typedef long int int32;
-typedef unsigned long int uint32;
-typedef long long int int64;
-typedef unsigned long long int  uint64;
 
 using namespace std;
 
