@@ -3,14 +3,13 @@
 
 using namespace std;
 
-//Basic Segment tree for log(n) range queries that update in log(n) time after insertions. Should work with any summable datastructure.
 template <class T>
 class SegTree {
     private:
         vector<T> input_array;
         vector<T> seg_tree;
 
-        T query_range_helper(T left_index, T right_index, T seg_index, T current_left_index, T current_right_index){
+        T query_range_helper(int left_index, int right_index, int seg_index, int current_left_index, int current_right_index){
             if(right_index < current_left_index || left_index > current_right_index){
                 //not covered
                 return 0;
@@ -24,7 +23,7 @@ class SegTree {
             }
         }
 
-        void insert_helper(T index, T value, T seg_index, T left_index, T right_index){
+        void insert_helper(int index, T value, int seg_index, int left_index, int right_index){
             if(index >= left_index && index <= right_index){
                 seg_tree[seg_index] += value;
                 if(left_index == right_index){
@@ -37,11 +36,11 @@ class SegTree {
             }
         }
 
-        T get_left_child_index(T index){
+        int get_left_child_index(int index){
             return 2*index + 1;
         }
 
-        T get_right_child_index(T index){
+        int get_right_child_index(int index){
             return 2*index + 2;
         }
 
@@ -52,8 +51,8 @@ class SegTree {
             build_seg_tree(0, 0, this->input_array.size()-1);
         }
 
-        //O(n) time complexity. O(log(n)) space complexity for call stack. This could be reduced to O(1) by making it iterative. 
-        T build_seg_tree(T seg_index, T left_index, T right_index){
+        //O(2*n) time complexity (n + n/2 + ... = 2*n). O(log(n)) space complexity for call stack. This could be reduced to O(1) by making it iterative 
+        T build_seg_tree(int seg_index, int left_index, int right_index){
             if(right_index == left_index){
                 this->seg_tree[seg_index] = this->input_array[left_index];
             }else{
@@ -65,16 +64,16 @@ class SegTree {
         }
 
         //O(log(n)) time-complexity. O(log(n)) space-complexity from stack. Can be reduced to O(1) space.
-        void insert(T index, T value){
+        void insert(int index, T value){
             insert_helper(index, (value - this->input_array[index]), 0, 0, this->input_array.size()-1);
         }
 
-        //assumes a valid query input (seg_index = 0)
-        T query_range_sum(T left_index, T right_index){
+        //assumes a valid query input (seg_index = 0 )
+        T query_range_sum(int left_index, int right_index){
             return query_range_helper(left_index, right_index, 0, 0, this->input_array.size()-1);
         }
 
-        void print_seg_tree(T seg_index, T left_index, T right_index){
+        void print_seg_tree(int seg_index, int left_index, int right_index){
             if(seg_index >= this->seg_tree.size()){
                 return;
             }
@@ -85,11 +84,11 @@ class SegTree {
             }
         }
 
-        T get_arr_size(){
+        int get_arr_size(){
             return this->input_array.size();
         }
 
-        T get_tree_size(){
+        int get_tree_size(){
             return this->seg_tree.size();
         }
 
@@ -99,7 +98,7 @@ int main(){
     ios::sync_with_stdio(0); 
     cin.tie(0); 
 
-    SegTree<int> t({1,2,3,4});
+    SegTree<int64_t> t({1,2,3,4});
 
     t.print_seg_tree(0, 0, 3);
     t.insert(0, 4);
